@@ -1,18 +1,19 @@
-import { person  , sayHello} from  './src/lib.js' ;
-
-//console.log(person.name);
-
-//console.log(sayHello('pranay'));
+import { http } from './src/http';
+import { ui }  from  './src/ui';
 
 
-async function getPosts(){
-    const response= await fetch
-    (' https://jsonplaceholder.typicode.com/posts')
 
-const data =await response.json();
-return data;
+//Get posts on DOM load
+document.addEventListener('DOMContentLoaded', getPosts);
+
+console.log("here!!!!!!!!!!!!");
+
+function getPosts(){
+    http.get('http://localhost:3000/posts')
+    .then(data => ui.showPosts(data))
+    .catch(err => console.log(err));
 }
-getPosts().then(posts =>console.log(posts))
+
 
 
 
